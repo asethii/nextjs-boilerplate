@@ -13,9 +13,9 @@ const events: TimelineEvent[] = [
     year: '2009-2016',
     title: 'Front-End Developer / Web Designer',
     description: [
-      'Built responsive websites and web applications',
-      'Designed user interfaces with focus on usability',
-      'Started learning modern web technologies'
+      'Developed custom themes, marketing sites, and e-commerce experiences across HTML/CSS/JS, PHP, Shopify, and WordPress',
+      'Established strong UI/UX foundations, SEO practices, conversion strategy, and data-backed decision making',
+      'Began transitioning from design-focused work into engineering leadership and system-level architecture'
     ],
   },
   {
