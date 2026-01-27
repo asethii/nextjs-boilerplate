@@ -1,41 +1,29 @@
-import Image from "next/image";
-import Timeline from "./components/Timeline";
+'use client';
+
+import Logo from "./components/Logo";
+import ThemeToggle from "./components/ThemeToggle";
+import ClientOnly from "./components/ClientOnly";
+import PageContent from "./components/PageContent";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        
-        <div className="flex flex-col gap-6 text-center sm:items-start sm:text-left">
-          <div className="flex gap-6 items-start">
-            <Image
-              className="dark:invert flex-shrink-0"
-              src="/headshot.png"
-              alt="Ashish Sethi"
-              width={128}   
-              height={128}
-              priority
-            />
-            <h1 className="text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-              Senior Web Engineer who builds high-impact, user-centered digital experiences.
-            </h1>
-          </div>
-          <p>
-            
-For 15+ years, I’ve been designing and engineering modern web solutions across the full stack: React, .NET, C#, ASP.NET, Shopify, Craft CMS, and more. My work blends engineering leadership, UI/UX intuition, accessibility standards, and AI-driven automation to create systems that scale.
+    <div>
+      <header className="flex items-center justify-between px-8 py-4 bg-[#FAF8F6]">
+        <ClientOnly>
+          <Logo />
+        </ClientOnly>
+        <ClientOnly>
+          <ThemeToggle />
+        </ClientOnly>
+      </header>
+      <ClientOnly>
+        <PageContent />
+      </ClientOnly>
+    </div>
+  );
+}
 
 
-          </p>
-          <p>I lead projects end-to-end — from concept and prototyping to architecture, development, testing, and launch. I collaborate closely with designers, product, marketing, legal, QA, and executive teams to drive clarity, reduce risk, and deliver outcomes.
-
-
-</p>
-<p>Whether I’m rethinking an e-commerce-driven lead funnel, automating partner website generation for thousands of dealers, or building AI tools to improve accessibility and content quality, I focus on one thing:
-</p>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Delivering fast, intuitive, reliable experiences that make the web better — for users, developers, and businesses.
-          </p>
-        </div>
         {/* <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
@@ -61,9 +49,6 @@ For 15+ years, I’ve been designing and engineering modern web solutions across
             Button
           </a>
         </div> */}
-        <Timeline />
-      </main>
-      
-    </div>
-  );
-}
+
+         
+       
