@@ -16,6 +16,8 @@ export default function PageContent() {
   const headshotRef = useRef<HTMLDivElement>(null);
   const parallaxContentRef = useRef<HTMLDivElement>(null);
   const [showScrollArrow, setShowScrollArrow] = useState(true);
+  const [contactSubject, setContactSubject] = useState('');
+  const [contactBody, setContactBody] = useState('');
 
 
 
@@ -440,6 +442,108 @@ export default function PageContent() {
             <UseCases />
           </ClientOnly>
         </main>
+      </div>
+
+      {/* Contact Form Section */}
+      <div 
+        className="py-20 px-4"
+        style={{
+          backgroundColor: theme === 'dark' ? '#181A20' : '#FAF8F6',
+        }}
+      >
+        <div className="max-w-2xl mx-auto">
+          <h2
+            className="text-4xl font-bold text-center mb-8"
+            style={{
+              color: theme === 'dark' ? '#D4A857' : '#292C34',
+            }}
+          >
+            Get In Touch
+          </h2>
+          <p
+            className="text-center mb-12 text-lg"
+            style={{
+              color: theme === 'dark' ? '#B0B8C3' : '#666',
+            }}
+          >
+            Interested in working together? Send me a message directly.
+          </p>
+          
+          <form 
+            className="space-y-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const mailtoLink = `mailto:ashinder@gmail.com?subject=${encodeURIComponent(contactSubject)}&body=${encodeURIComponent(contactBody)}`;
+              window.location.href = mailtoLink;
+            }}
+          >
+            <div>
+              <label 
+                htmlFor="subject" 
+                className="block text-sm font-medium mb-2"
+                style={{
+                  color: theme === 'dark' ? '#D0D8E0' : '#444',
+                }}
+              >
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                value={contactSubject}
+                onChange={(e) => setContactSubject(e.target.value)}
+                className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2"
+                style={{
+                  backgroundColor: theme === 'dark' ? '#1F2229' : '#FFFFFF',
+                  borderColor: theme === 'dark' ? '#3A4252' : '#E5E0DA',
+                  color: theme === 'dark' ? '#D0D8E0' : '#444',
+                }}
+                placeholder="What's this about?"
+                required
+              />
+            </div>
+            
+            <div>
+              <label 
+                htmlFor="message" 
+                className="block text-sm font-medium mb-2"
+                style={{
+                  color: theme === 'dark' ? '#D0D8E0' : '#444',
+                }}
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                value={contactBody}
+                onChange={(e) => setContactBody(e.target.value)}
+                rows={6}
+                className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 resize-vertical"
+                style={{
+                  backgroundColor: theme === 'dark' ? '#1F2229' : '#FFFFFF',
+                  borderColor: theme === 'dark' ? '#3A4252' : '#E5E0DA',
+                  color: theme === 'dark' ? '#D0D8E0' : '#444',
+                }}
+                placeholder="Tell me more about your opportunity..."
+                required
+              />
+            </div>
+            
+            <div className="text-center">
+              <button
+                type="submit"
+                className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                style={{
+                  background: theme === 'dark' 
+                    ? 'linear-gradient(to right, #3B82F6, #8B5CF6)' 
+                    : 'linear-gradient(to right, #3B82F6, #8B5CF6)',
+                }}
+              >
+                Send Email
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
