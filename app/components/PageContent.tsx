@@ -9,6 +9,7 @@ import Logo from './Logo';
 import ScrollDownButton from './ScrollDownButton';
 import ImageCarousel from './ImageCarousel';
 import UseCases from './UseCases';
+import TubesCursor from './TubesCursor';
 
 export default function PageContent() {
   const { theme } = useTheme();
@@ -97,13 +98,25 @@ export default function PageContent() {
           backgroundColor: theme === 'dark' ? '#181A20' : '#FAF8F6',
         }}
       >
+        <ClientOnly>
+          <TubesCursor />
+        </ClientOnly>
         <main 
-          className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-16 pt-0 sm:pt-auto"
-          style={{
-            backgroundColor: theme === 'dark' ? '#1F2229' : '#FFFFFF',
-          }}
+          className="flex h-full w-full max-w-3xl flex-col items-center justify-center px-16 pt-0 sm:pt-auto relative z-10"
         >
-          <div className="flex flex-col gap-12 -mt-20 sm:mt-0">
+          <div 
+            className="flex flex-col gap-12 -mt-20 sm:mt-0 relative z-20"
+            style={{
+              width: '150%',
+              height: '150%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundImage: theme === 'dark' 
+                ? 'radial-gradient(circle, rgb(31, 34, 41) 7%, rgb(31, 34, 41) 15%, rgba(31, 34, 41, 0) 57%)'
+                : 'radial-gradient(circle, rgb(255, 255, 255) 7%, rgb(255, 255, 255) 15%, rgba(255, 255, 255, 0) 57%)'
+            }}
+          >
             <ClientOnly>
               <Logo />
             </ClientOnly>
@@ -193,6 +206,29 @@ export default function PageContent() {
                     </svg>
                     LinkedIn
                   </a>
+                  <button
+                    onClick={() => {
+                      const element = document.getElementById('live-examples');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        // Add bounce animation
+                        element.style.animation = 'none';
+                        setTimeout(() => {
+                          element.style.animation = 'bounce 0.6s ease-in-out';
+                        }, 10);
+                        setTimeout(() => {
+                          element.style.animation = '';
+                        }, 610);
+                      }
+                    }}
+                    className="inline-flex items-center px-2 py-1 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#23272f] text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#33363b] transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4A857] text-xs cursor-pointer"
+                    aria-label="View Live Examples"
+                  >
+                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg>
+                    Live Examples
+                  </button>
                 </div>
               </div>
             </div>
@@ -382,7 +418,7 @@ export default function PageContent() {
           color: theme === 'dark' ? '#D4A857' : '#000000',
         }}>Delivering fast, intuitive, reliable experiences that make the web better - for users, developers and businesses.</p>
             
-            <h2 className="text-4xl font-bold text-center mb-16" style={{ color: theme === 'dark' ? '#D4A857' : '#000000' }}>Live Examples</h2>
+            <h2 id="live-examples" className="text-4xl font-bold text-center mb-8" style={{ color: theme === 'dark' ? '#D4A857' : '#000000' }}>Live Examples</h2>
             <ClientOnly>
               <ImageCarousel />
             </ClientOnly>
@@ -443,8 +479,7 @@ export default function PageContent() {
 
       {/* Section 3: Timeline - Full Viewport with Extra Spacing */}
       <div 
-        
-        className="min-h-screen flex items-center justify-center pt-20 pb-20"
+        className="w-full min-h-screen flex items-center justify-center pt-20 pb-20"
         style={{
           backgroundColor: theme === 'dark' ? '#181A20' : '#FAF8F6',
         }}
